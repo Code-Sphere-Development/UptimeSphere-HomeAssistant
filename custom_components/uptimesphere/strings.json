@@ -1,0 +1,145 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to UptimeSphere",
+        "description": "Enter the address of your UptimeSphere instance and paste an API token. Create the token in UptimeSphere under “API tokens”.",
+        "data": {
+          "base_url": "Address",
+          "api_token": "API token",
+          "verify_ssl": "Verify SSL certificate"
+        },
+        "data_description": {
+          "base_url": "For example https://uptime.example.com — the site root, not a subpage.",
+          "api_token": "Create one at /tokens in the UptimeSphere web interface.",
+          "verify_ssl": "Turn off only if the server uses a self-signed certificate."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Reauthenticate UptimeSphere",
+        "description": "The API token for {url} is no longer accepted. Create a new one at /tokens and paste it here.",
+        "data": {
+          "api_token": "API token"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect. Check the address and that the server is reachable from Home Assistant.",
+      "invalid_auth": "The token was rejected. Create a new one at /tokens and paste it here.",
+      "no_team": "The token is valid, but this account currently has no team. Sign in to the UptimeSphere web interface once and select a team.",
+      "invalid_url": "Enter a full address including http:// or https://.",
+      "invalid_host": "That address responded, but not with the UptimeSphere API. Does it point at the instance root?",
+      "unknown": "Unexpected error — see the Home Assistant log for details."
+    },
+    "abort": {
+      "already_configured": "This account is already set up for this UptimeSphere instance.",
+      "reauth_successful": "Re-authentication was successful.",
+      "wrong_account": "The token belongs to a different UptimeSphere account."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "UptimeSphere settings",
+        "description": "Detail data (response time, uptime, SSL) is expensive server-side — keep that interval generous.",
+        "data": {
+          "scan_interval": "Polling interval",
+          "detail_scan_interval": "Detail data interval",
+          "notify_service": "Notification service",
+          "notify_on": "Notify on",
+          "notify_monitors": "Only these monitors"
+        },
+        "data_description": {
+          "notify_service": "Leave empty to send no notification. The event is fired either way.",
+          "notify_monitors": "Empty means: every monitor."
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "reachable": {
+        "name": "Reachable"
+      },
+      "any_monitor_down": {
+        "name": "Monitor down"
+      }
+    },
+    "sensor": {
+      "status": {
+        "name": "Status",
+        "state": {
+          "unknown": "Unknown",
+          "pending": "Pending",
+          "up": "Up",
+          "down": "Down",
+          "warning": "Warning",
+          "paused": "Paused",
+          "maintenance": "Maintenance"
+        }
+      },
+      "last_checked": {
+        "name": "Last checked"
+      },
+      "next_check": {
+        "name": "Next check"
+      },
+      "response_time": {
+        "name": "Response time"
+      },
+      "uptime_24h": {
+        "name": "Uptime 24 h"
+      },
+      "uptime_7d": {
+        "name": "Uptime 7 days"
+      },
+      "uptime_30d": {
+        "name": "Uptime 30 days"
+      },
+      "uptime_90d": {
+        "name": "Uptime 90 days"
+      },
+      "uptime_365d": {
+        "name": "Uptime 365 days"
+      },
+      "ssl_expiry_days": {
+        "name": "SSL certificate expires in"
+      },
+      "monitors_total": {
+        "name": "Monitors total"
+      },
+      "monitors_online": {
+        "name": "Monitors online"
+      },
+      "monitors_offline": {
+        "name": "Monitors offline"
+      },
+      "monitors_warning": {
+        "name": "Monitors warning"
+      },
+      "ssl_expiring_soon": {
+        "name": "SSL expiring soon"
+      },
+      "avg_response_time": {
+        "name": "Average response time"
+      }
+    }
+  },
+  "selector": {
+    "monitor_status": {
+      "options": {
+        "up": "Up",
+        "down": "Down",
+        "warning": "Warning",
+        "paused": "Paused",
+        "maintenance": "Maintenance"
+      }
+    }
+  },
+  "issues": {
+    "no_team": {
+      "title": "UptimeSphere: no team available",
+      "description": "UptimeSphere reports no accessible team for this account. This also happens with a valid API token once the server-side CodeSphere session has expired. Sign in at {url} in a browser once; the integration recovers on its own afterwards."
+    }
+  }
+}

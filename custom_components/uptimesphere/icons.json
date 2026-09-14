@@ -1,0 +1,26 @@
+{
+  "entity": {
+    "binary_sensor": {
+      "reachable": { "default": "mdi:lan-connect", "state": { "off": "mdi:lan-disconnect" } },
+      "any_monitor_down": { "default": "mdi:alert-circle-outline", "state": { "on": "mdi:alert-circle" } }
+    },
+    "sensor": {
+      "status": { "default": "mdi:list-status" },
+      "last_checked": { "default": "mdi:clock-check-outline" },
+      "next_check": { "default": "mdi:clock-fast" },
+      "response_time": { "default": "mdi:timer-outline" },
+      "uptime_24h": { "default": "mdi:chart-line" },
+      "uptime_7d": { "default": "mdi:chart-line" },
+      "uptime_30d": { "default": "mdi:chart-line" },
+      "uptime_90d": { "default": "mdi:chart-line" },
+      "uptime_365d": { "default": "mdi:chart-line" },
+      "ssl_expiry_days": { "default": "mdi:certificate-outline" },
+      "monitors_total": { "default": "mdi:counter" },
+      "monitors_online": { "default": "mdi:check-network-outline" },
+      "monitors_offline": { "default": "mdi:close-network-outline" },
+      "monitors_warning": { "default": "mdi:alert-outline" },
+      "ssl_expiring_soon": { "default": "mdi:certificate" },
+      "avg_response_time": { "default": "mdi:timer-outline" }
+    }
+  }
+}

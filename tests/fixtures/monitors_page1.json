@@ -1,0 +1,28 @@
+{
+  "data": {
+    "data": [
+      {
+        "id": 1,
+        "name": "Website",
+        "description": "Public site",
+        "type": "https",
+        "config": { "url": "https://example.com", "headers": { "X-Secret": "abc" } },
+        "status": "up",
+        "priority": "default",
+        "interval_seconds": 60,
+        "timeout_seconds": 10,
+        "retries": 3,
+        "retry_delay_seconds": 10,
+        "location": "eu-central",
+        "tags": [{ "id": 4, "name": "prod", "color": "#ff0000" }],
+        "notification_channels": [],
+        "last_checked_at": "2026-09-14T10:00:00.000000Z",
+        "next_check_at": "2026-09-14T10:01:00.000000Z",
+        "created_at": "2026-01-01T00:00:00.000000Z",
+        "updated_at": "2026-09-14T10:00:00.000000Z"
+      }
+    ],
+    "links": { "first": "?page=1", "last": "?page=2", "prev": null, "next": "?page=2" },
+    "meta": { "current_page": 1, "last_page": 2, "per_page": 20, "total": 2 }
+  }
+}

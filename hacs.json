@@ -1,0 +1,6 @@
+{
+  "name": "UptimeSphere",
+  "render_readme": true,
+  "hide_default_branch": true,
+  "homeassistant": "2025.2.0"
+}

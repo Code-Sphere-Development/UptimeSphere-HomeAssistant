@@ -1,0 +1,38 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Both actions track Home Assistant releases, so a weekly run catches
+    # breakage caused by upstream rather than by a commit here.
+    - cron: "0 4 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  hassfest:
+    name: hassfest
+    # The official Home Assistant actions run in Docker containers, so they
+    # need a GitHub-hosted runner rather than the self-hosted ones the other
+    # CodeSphere repositories use.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: home-assistant/actions/hassfest@master
+
+  hacs:
+    name: HACS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hacs/action@main
+        with:
+          category: integration

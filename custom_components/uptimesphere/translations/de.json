@@ -1,0 +1,145 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Mit UptimeSphere verbinden",
+        "description": "Gib die Adresse deiner UptimeSphere-Instanz an und füge einen API-Token ein. Den Token erzeugst du in UptimeSphere unter „API-Tokens“.",
+        "data": {
+          "base_url": "Adresse",
+          "api_token": "API-Token",
+          "verify_ssl": "SSL-Zertifikat prüfen"
+        },
+        "data_description": {
+          "base_url": "Zum Beispiel https://uptime.example.com — die Startadresse, nicht eine Unterseite.",
+          "api_token": "Unter /tokens in der UptimeSphere-Weboberfläche zu erzeugen.",
+          "verify_ssl": "Nur abschalten, wenn der Server ein selbst signiertes Zertifikat nutzt."
+        }
+      },
+      "reauth_confirm": {
+        "title": "UptimeSphere neu anmelden",
+        "description": "Der API-Token für {url} wird nicht mehr akzeptiert. Erzeuge unter /tokens einen neuen und füge ihn hier ein.",
+        "data": {
+          "api_token": "API-Token"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Verbindung fehlgeschlagen. Prüfe die Adresse und ob der Server von Home Assistant aus erreichbar ist.",
+      "invalid_auth": "Der Token wurde abgelehnt. Erzeuge unter /tokens einen neuen und füge ihn hier ein.",
+      "no_team": "Der Token ist gültig, aber dieses Konto hat aktuell kein Team. Melde dich einmal in der UptimeSphere-Weboberfläche an und wähle ein Team aus.",
+      "invalid_url": "Gib eine vollständige Adresse mit http:// oder https:// an.",
+      "invalid_host": "Diese Adresse antwortet, aber nicht mit der UptimeSphere-API. Zeigt sie wirklich auf die Startseite der Instanz?",
+      "unknown": "Unerwarteter Fehler — Details stehen im Home-Assistant-Protokoll."
+    },
+    "abort": {
+      "already_configured": "Dieses Konto ist auf dieser UptimeSphere-Instanz bereits eingerichtet.",
+      "reauth_successful": "Neu angemeldet.",
+      "wrong_account": "Der Token gehört zu einem anderen UptimeSphere-Konto."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "UptimeSphere-Einstellungen",
+        "description": "Detaildaten (Antwortzeit, Uptime, SSL) sind serverseitig teuer — lass dieses Intervall großzügig.",
+        "data": {
+          "scan_interval": "Abfrageintervall",
+          "detail_scan_interval": "Intervall für Detaildaten",
+          "notify_service": "Benachrichtigungsdienst",
+          "notify_on": "Benachrichtigen bei",
+          "notify_monitors": "Nur diese Monitore"
+        },
+        "data_description": {
+          "notify_service": "Leer lassen, um keine Benachrichtigung zu senden. Das Ereignis wird trotzdem immer ausgelöst.",
+          "notify_monitors": "Leer bedeutet: alle Monitore."
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "reachable": {
+        "name": "Erreichbar"
+      },
+      "any_monitor_down": {
+        "name": "Monitor ausgefallen"
+      }
+    },
+    "sensor": {
+      "status": {
+        "name": "Status",
+        "state": {
+          "unknown": "Unbekannt",
+          "pending": "Ausstehend",
+          "up": "Erreichbar",
+          "down": "Nicht erreichbar",
+          "warning": "Warnung",
+          "paused": "Pausiert",
+          "maintenance": "Wartung"
+        }
+      },
+      "last_checked": {
+        "name": "Letzte Prüfung"
+      },
+      "next_check": {
+        "name": "Nächste Prüfung"
+      },
+      "response_time": {
+        "name": "Antwortzeit"
+      },
+      "uptime_24h": {
+        "name": "Uptime 24 h"
+      },
+      "uptime_7d": {
+        "name": "Uptime 7 Tage"
+      },
+      "uptime_30d": {
+        "name": "Uptime 30 Tage"
+      },
+      "uptime_90d": {
+        "name": "Uptime 90 Tage"
+      },
+      "uptime_365d": {
+        "name": "Uptime 365 Tage"
+      },
+      "ssl_expiry_days": {
+        "name": "SSL-Zertifikat läuft ab in"
+      },
+      "monitors_total": {
+        "name": "Monitore gesamt"
+      },
+      "monitors_online": {
+        "name": "Monitore online"
+      },
+      "monitors_offline": {
+        "name": "Monitore offline"
+      },
+      "monitors_warning": {
+        "name": "Monitore mit Warnung"
+      },
+      "ssl_expiring_soon": {
+        "name": "SSL läuft bald ab"
+      },
+      "avg_response_time": {
+        "name": "Mittlere Antwortzeit"
+      }
+    }
+  },
+  "selector": {
+    "monitor_status": {
+      "options": {
+        "up": "Erreichbar",
+        "down": "Nicht erreichbar",
+        "warning": "Warnung",
+        "paused": "Pausiert",
+        "maintenance": "Wartung"
+      }
+    }
+  },
+  "issues": {
+    "no_team": {
+      "title": "UptimeSphere: kein Team verfügbar",
+      "description": "UptimeSphere meldet für dieses Konto kein zugängliches Team. Das passiert auch bei gültigem API-Token, wenn die serverseitig gespeicherte CodeSphere-Sitzung abgelaufen ist. Melde dich einmal unter {url} im Browser an; danach funktioniert die Integration wieder von selbst."
+    }
+  }
+}

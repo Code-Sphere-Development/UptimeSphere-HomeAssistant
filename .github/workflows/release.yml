@@ -1,0 +1,29 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  verify-version:
+    name: manifest version matches tag
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compare manifest version with the release tag
+        run: |
+          set -euo pipefail
+          manifest="$(jq -r .version custom_components/uptimesphere/manifest.json)"
+          tag="${GITHUB_REF_NAME#v}"
+
+          echo "manifest: ${manifest}"
+          echo "tag:      ${tag}"
+
+          if [[ "${manifest}" != "${tag}" ]]; then
+            echo "::error::manifest.json says ${manifest} but the release is tagged ${tag}"
+            exit 1
+          fi
