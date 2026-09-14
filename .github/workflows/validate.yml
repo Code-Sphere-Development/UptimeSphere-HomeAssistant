@@ -36,3 +36,8 @@ jobs:
       - uses: hacs/action@main
         with:
           category: integration
+          # No brand assets yet: HACS falls back to the central
+          # home-assistant/brands repository, where this integration is not
+          # listed. Drop this once an icon lands, either in
+          # custom_components/uptimesphere/brand/ or via a brands PR.
+          ignore: brands

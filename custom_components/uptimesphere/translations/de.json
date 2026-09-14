@@ -10,7 +10,7 @@
           "verify_ssl": "SSL-Zertifikat prüfen"
         },
         "data_description": {
-          "base_url": "Zum Beispiel https://uptime.example.com — die Startadresse, nicht eine Unterseite.",
+          "base_url": "Die Startadresse deiner Instanz — keine Unterseite und ohne den API-Pfad.",
           "api_token": "Unter /tokens in der UptimeSphere-Weboberfläche zu erzeugen.",
           "verify_ssl": "Nur abschalten, wenn der Server ein selbst signiertes Zertifikat nutzt."
         }
@@ -27,7 +27,7 @@
       "cannot_connect": "Verbindung fehlgeschlagen. Prüfe die Adresse und ob der Server von Home Assistant aus erreichbar ist.",
       "invalid_auth": "Der Token wurde abgelehnt. Erzeuge unter /tokens einen neuen und füge ihn hier ein.",
       "no_team": "Der Token ist gültig, aber dieses Konto hat aktuell kein Team. Melde dich einmal in der UptimeSphere-Weboberfläche an und wähle ein Team aus.",
-      "invalid_url": "Gib eine vollständige Adresse mit http:// oder https:// an.",
+      "invalid_url": "Gib eine vollständige Adresse inklusive Protokoll an.",
       "invalid_host": "Diese Adresse antwortet, aber nicht mit der UptimeSphere-API. Zeigt sie wirklich auf die Startseite der Instanz?",
       "unknown": "Unerwarteter Fehler — Details stehen im Home-Assistant-Protokoll."
     },

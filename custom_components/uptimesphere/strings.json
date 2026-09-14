@@ -10,7 +10,7 @@
           "verify_ssl": "Verify SSL certificate"
         },
         "data_description": {
-          "base_url": "For example https://uptime.example.com — the site root, not a subpage.",
+          "base_url": "The root address of your instance — not a subpage, and without the API path.",
           "api_token": "Create one at /tokens in the UptimeSphere web interface.",
           "verify_ssl": "Turn off only if the server uses a self-signed certificate."
         }
@@ -27,7 +27,7 @@
       "cannot_connect": "Failed to connect. Check the address and that the server is reachable from Home Assistant.",
       "invalid_auth": "The token was rejected. Create a new one at /tokens and paste it here.",
       "no_team": "The token is valid, but this account currently has no team. Sign in to the UptimeSphere web interface once and select a team.",
-      "invalid_url": "Enter a full address including http:// or https://.",
+      "invalid_url": "Enter a full address including the protocol.",
       "invalid_host": "That address responded, but not with the UptimeSphere API. Does it point at the instance root?",
       "unknown": "Unexpected error — see the Home Assistant log for details."
     },
