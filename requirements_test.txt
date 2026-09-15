@@ -1,4 +1,4 @@
 # Pinned to a minor series: this package hard-pins the Home Assistant version
 # it tests against, so an unpinned upgrade silently changes the target.
-pytest-homeassistant-custom-component~=0.13.0
+pytest-homeassistant-custom-component~=0.13.364
 ruff~=0.9
