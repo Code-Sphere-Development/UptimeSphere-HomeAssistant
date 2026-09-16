@@ -15,15 +15,25 @@ concurrency:
 
 jobs:
   test:
-    name: ruff + pytest
+    name: ruff + pytest (Python ${{ matrix.python-version }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Both ends of the supported range. pytest-homeassistant-custom-component
+        # pins the Home Assistant version it tests against and drops older
+        # interpreters as Home Assistant does, so the requirement in
+        # requirements_test.txt resolves differently per interpreter: 3.13 gets
+        # the last release that still supports it, 3.14 gets the current one.
+        # Testing both means neither the oldest supported Home Assistant nor the
+        # one people actually run goes unverified.
+        python-version: ["3.13", "3.14"]
     steps:
       - uses: actions/checkout@v7
 
       - uses: actions/setup-python@v7
         with:
-          # Home Assistant 2025.2 requires Python 3.13.
-          python-version: "3.13"
+          python-version: ${{ matrix.python-version }}
           cache: pip
 
       - name: Install test dependencies
@@ -36,6 +46,9 @@ jobs:
 
       - name: Format check
         run: ruff format --check .
+
+      - name: Show what is being tested against
+        run: python -c "import homeassistant; print('homeassistant', homeassistant.__version__)"
 
       - name: Test
         run: pytest --cov=custom_components/uptimesphere --cov-report=term-missing

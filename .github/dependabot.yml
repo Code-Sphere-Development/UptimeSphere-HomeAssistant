@@ -4,6 +4,12 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      # The requirement is deliberately a floor, not a pin: each interpreter in
+      # the test matrix resolves it to the newest release it can run. Raising
+      # the floor to the newest release would make the Python 3.13 leg
+      # uninstallable, because newer releases require 3.14.
+      - dependency-name: "pytest-homeassistant-custom-component"
     assignees:
       - "Coho04"
     reviewers:

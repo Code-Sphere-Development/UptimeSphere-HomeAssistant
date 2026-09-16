@@ -26,7 +26,6 @@ from typing import Any
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import CALLBACK_TYPE, HomeAssistant, callback
 from homeassistant.exceptions import ConfigEntryAuthFailed
-from homeassistant.helpers.debounce import Debouncer
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .api import (
@@ -39,10 +38,6 @@ from .api import (
 from .const import DETAIL_CONCURRENCY, DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
-
-# Wait this long after an entity registers before refetching detail data, so
-# that adding twenty entities at startup results in one refresh, not twenty.
-REGISTRATION_DEBOUNCE = 5.0
 
 
 @dataclass(slots=True)
@@ -162,13 +157,6 @@ class MonitorDetailCoordinator(
         # removing one of them must not stop fetching for the others.
         self._registered: Counter[int] = Counter()
         self._semaphore = asyncio.Semaphore(DETAIL_CONCURRENCY)
-        self._registration_debouncer = Debouncer(
-            hass,
-            _LOGGER,
-            cooldown=REGISTRATION_DEBOUNCE,
-            immediate=False,
-            function=self.async_request_refresh,
-        )
 
     @callback
     def register_monitor(self, monitor_id: int) -> CALLBACK_TYPE:
@@ -181,9 +169,12 @@ class MonitorDetailCoordinator(
         self._registered[monitor_id] += 1
 
         if first:
-            # Debounced: twenty entities registering at startup produce one
-            # refresh, not twenty.
-            self.hass.async_create_task(self._registration_debouncer.async_call())
+            # async_request_refresh is already debounced by the coordinator, so
+            # twenty entities registering at startup still produce one refresh.
+            # Using it rather than a second debouncer of our own also means the
+            # pending timer is cancelled on unload, which an extra debouncer
+            # would leak.
+            self.hass.async_create_task(self.async_request_refresh())
 
         return partial(self._unregister_monitor, monitor_id)
 

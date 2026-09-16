@@ -144,10 +144,15 @@ With 20 monitors and the defaults that is 2 requests/minute plus 40 requests eve
 
 Home Assistant 2025.2.0 or newer.
 
+CI runs the test suite on Python 3.13 and 3.14. That is not redundancy: the test
+harness pins the Home Assistant version it tests against and drops interpreters
+as Home Assistant does, so 3.13 exercises the oldest Home Assistant still
+reachable and 3.14 exercises the current one.
+
 ## Development
 
 ```bash
-python3.13 -m venv .venv && source .venv/bin/activate
+python3.14 -m venv .venv && source .venv/bin/activate
 pip install -r requirements_test.txt
 ruff check . && pytest
 ```
