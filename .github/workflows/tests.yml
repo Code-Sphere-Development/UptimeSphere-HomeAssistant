@@ -47,8 +47,10 @@ jobs:
       - name: Format check
         run: ruff format --check .
 
+      # The requirement is a floor, so which Home Assistant this leg actually
+      # exercises is decided by pip, not by the repository. Print it.
       - name: Show what is being tested against
-        run: python -c "import homeassistant; print('homeassistant', homeassistant.__version__)"
+        run: python -c "from importlib.metadata import version; print('homeassistant', version('homeassistant'))"
 
       - name: Test
         run: pytest --cov=custom_components/uptimesphere --cov-report=term-missing
